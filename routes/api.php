@@ -1,19 +1,34 @@
 <?php
 
-use Illuminate\Http\Request;
+declare(strict_types=1);
+
+use App\Http\Controllers\Api\v1\GroupController;
+use App\Http\Controllers\Api\v1\LectureController;
+use App\Http\Controllers\Api\v1\StudentController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::group(['prefix'=>'v1'],function () {
+    Route::controller(StudentController::class)->group(function () {
+        Route::get('/students','index');
+        Route::get('/students/{student}','show');
+        Route::post('/students','store');
+        Route::patch('/students/{student}','update');
+        Route::delete('/students/{student}','delete');
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::controller(GroupController::class)->group(function () {
+        Route::get('/groups','index');
+        Route::get('/groups/{group}','show');
+        Route::post('/groups','store');
+        Route::patch('/groups/{group}','update');
+        Route::delete('/groups/{group}','delete');
+    });
+
+    Route::controller(LectureController::class)->group(function () {
+        Route::get('/lectures','index');
+        Route::get('/lectures/{lecture}','show');
+        Route::post('/lectures','store');
+        Route::patch('/lectures/{lecture}','update');
+        Route::delete('/lectures/{lecture}','delete');
+    });
 });
