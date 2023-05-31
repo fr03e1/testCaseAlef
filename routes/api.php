@@ -21,8 +21,7 @@ Route::group(['prefix'=>'v1'],function () {
         Route::get('/groups/{group}','show');
         Route::post('/groups','store');
         Route::get('/groups/lectures/{groups}','lectures');
-        Route::post('/groups/lectures/{groups}','storeStudyPlan');
-        Route::patch('/groups/lectures','updateLectures');
+        Route::post('/groups/lectures','storeStudyPlan');
         Route::patch('/groups/{group}','update');
         Route::delete('/groups/{group}','delete');
     });

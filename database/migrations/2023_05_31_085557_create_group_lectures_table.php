@@ -18,8 +18,9 @@ return new class extends Migration
 
             $table->unsignedSmallInteger('order');
 
-            $table->unique('group_id','lecture_id');
-            $table->unique('lecture_id','order');
+            $table->unique(['lecture_id','group_id']);
+            $table->unique(['lecture_id','order']);
+            $table->unique(['group_id','order']);
             $table->timestamps();
         });
     }

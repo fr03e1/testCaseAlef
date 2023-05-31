@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api\GroupLecture;
+namespace App\Http\Requests\Api\StudyPlan;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class GroupLectureStoreRequest extends FormRequest
+class StudyPlanStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,23 @@ class GroupLectureStoreRequest extends FormRequest
     {
         return [
             "study_plan" => "required|array|min:1",
+            "study_plan.*.group_id" => [
+                'required',
+                'numeric',
+                Rule::exists('groups','id'),
+                'unique:groups_lectures,group_id,' . $this->group_id . ',id,lecture_id,' . $this->study_plan[0]['lecture_id'],
+                'unique:groups_lectures,group_id,' . $this->group_id . ',id,order,' . $this->study_plan[0]['order'],
+            ],
             "study_plan.*.lecture_id" =>[
                 'required',
                 'numeric',
-                Rule::exists('lectures','id')
+                Rule::exists('lectures','id'),
             ],
 
             "study_plan.*.order" => [
                 'required',
                 'numeric',
+                'unique:groups_lectures,order,' . $this->order . ',id,lecture_id,' . $this->study_plan[0]['lecture_id'],
             ]
         ];
     }

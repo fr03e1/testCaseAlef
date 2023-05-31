@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
@@ -37,11 +39,11 @@ class LectureController extends Controller
         return response()->json('Лекция была успешно создана');
     }
 
-    public function update(LectureUpdateRequest $request,Lecture $lecture): JsonResponse
+    public function update(LectureUpdateRequest $request, Lecture $lecture): JsonResponse
     {
         $data = $request->validated();
         $lecture->update($data);
-        if($data) {
+        if ($data) {
             $lecture->update($data);
             return response()->json('Лекция была успешна обновлена');
         }
@@ -51,6 +53,6 @@ class LectureController extends Controller
     public function delete(Lecture $lecture): JsonResponse
     {
         $lecture->delete();
-        return response()->json('done') ;
+        return response()->json('done');
     }
 }
