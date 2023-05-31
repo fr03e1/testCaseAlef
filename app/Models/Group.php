@@ -25,7 +25,7 @@ class Group extends Model
         return $this->belongsToMany(Lecture::class,'groups_lectures');
     }
 
-    public function attachStudyPlan(array $array)
+    public function attachStudyPlan(array $array): void
     {
 
         foreach ($array['study_plan'] as $item) {
@@ -33,6 +33,15 @@ class Group extends Model
             $group->lectures()->attach($item["lecture_id"], [
                 'order' => $item["order"],
             ]);
+        }
+    }
+
+    public function syncStudentPlan(array $array)
+    {
+
+        foreach ($array['study_plan'] as $item) {
+            $group = $this->find($item["group_id"]);
+            $group->lectures()->syncWithPivotValues($item["lecture_id"], ['order'=>$item['order']]);
         }
     }
 }

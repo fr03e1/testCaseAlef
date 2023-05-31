@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\StudyPlan;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StudyPlanStoreRequest extends FormRequest
+class StudyPlanUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,6 @@ class StudyPlanStoreRequest extends FormRequest
                 'required',
                 'numeric',
                 Rule::exists('groups','id'),
-                'unique:groups_lectures,group_id,' . $this->group_id . ',id,lecture_id,' . $this->study_plan[0]['lecture_id'],
-                'unique:groups_lectures,group_id,' . $this->group_id . ',id,order,' . $this->study_plan[0]['order'],
             ],
 
             "study_plan.*.lecture_id" =>[
