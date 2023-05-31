@@ -61,13 +61,10 @@ class GroupController extends Controller
         $data = $storeRequest->validated();
 
         if ($data) {
-            $group = $this->group->find($data['study_plan'][0]["group_id"]);
-            $group->lectures()->attach($data['study_plan'][0]["lecture_id"], [
-                'order' => $data['study_plan'][0]["order"],
-            ]);
-
+            $this->group->attachStudyPlan($data);
             return response()->json('Учебный план создан');
         }
+
         return response()->json('Выберите либо другое время, либо другую лекцию');
     }
 

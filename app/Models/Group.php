@@ -24,4 +24,15 @@ class Group extends Model
     {
         return $this->belongsToMany(Lecture::class,'groups_lectures');
     }
+
+    public function attachStudyPlan(array $array)
+    {
+
+        foreach ($array['study_plan'] as $item) {
+            $group = $this->find($item["group_id"]);
+            $group->lectures()->attach($item["lecture_id"], [
+                'order' => $item["order"],
+            ]);
+        }
+    }
 }
