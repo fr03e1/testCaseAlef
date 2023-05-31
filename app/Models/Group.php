@@ -36,7 +36,7 @@ class Group extends Model
         }
     }
 
-    public function syncStudentPlan(array $array)
+    public function syncStudentPlan(array $array): void
     {
 
         foreach ($array['study_plan'] as $item) {
