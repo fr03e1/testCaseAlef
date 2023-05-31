@@ -19,7 +19,8 @@ class StudentResource extends JsonResource
         return [
                 "name" => $this->name,
                 "email" => $this->email,
-                "group" => GroupResource::make($this->whenLoaded('group'))
+                "group" => GroupResource::make($this->whenLoaded('group')),
+                "lectures" => LectureResource::make($this->whenLoaded('lectures'))
         ];
     }
 }

@@ -26,7 +26,7 @@ class StudentController extends Controller
 
     public function show(int $id): StudentResource
     {
-        return StudentResource::make($this->student::with(['group'])->find($id));
+        return StudentResource::make($this->student::with(['group.lectures'])->find($id));
     }
 
     public function store(StudentStoreRequest $request): JsonResponse

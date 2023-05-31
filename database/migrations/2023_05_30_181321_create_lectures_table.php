@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('topic')->unique();
             $table->text('description');
+
             $table->timestamps();
         });
     }

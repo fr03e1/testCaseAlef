@@ -26,7 +26,7 @@ class LectureController extends Controller
 
     public function show(int $id): LectureResource
     {
-        return LectureResource::make($this->lecture->find($id));
+        return LectureResource::make($this->lecture::with('groups.students')->find($id));
     }
 
 

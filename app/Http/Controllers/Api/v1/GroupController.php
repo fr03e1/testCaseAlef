@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Group\GroupRequest;
-use App\Http\Requests\Api\Group\GroupUpdateRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
@@ -49,5 +48,10 @@ class GroupController extends Controller
     {
         $group->delete();
         return response()->json('done') ;
+    }
+
+    public function lectures(int $id): GroupResource
+    {
+        return GroupResource::make($this->group::with(['lectures'])->find($id));
     }
 }

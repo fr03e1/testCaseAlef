@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use PHPUnit\TextUI\Configuration\GroupCollection;
 
 class LectureResource extends JsonResource
 {
@@ -17,6 +18,7 @@ class LectureResource extends JsonResource
         return [
             'topic'=> $this->topic,
             'description' => $this->description,
+            'groups' => GroupResource::collection($this->whenLoaded('groups')),
         ];
     }
 }
